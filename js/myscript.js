@@ -4,20 +4,37 @@ console.log("Ciao Cianuro.. oggi PALI & DISPARI");
 let parola = prompt("Inserisci una parola");
 console.log(parola);
 
-// PRENDO LA PAROLA E LA METTO IN UN ARRAY DIVIDENDOLA IN LETTERE
-let putInArray = parola.split("");
-console.log(putInArray);
+let prova = palindroma(parola);
+console.log(prova);
 
-// CREO UN NUOVO ARRAY CON I VALORI INVERTITI
-let parolaReverse = putInArray.reverse();
-console.log(parolaReverse);
+let risulto = palindroma(parola);
+if (risulto === true) {
+  document.write("la parola " + parola + " è palindroma");
+} else {
+  document.write("la parola " + parola + " NON è palindroma");
+}
 
-// CONFRONTO I DUE ARRAY
-for (let i = 0; i < parolaReverse.length; i++) {
-  if (parolaReverse[i] != putInArray[i]) {
-    console.log("La parola inserita è palindroma");
-    console.log(parolaReverse[i], putInArray[i]);
+// INIZIALIZZO LA FUNZIONE
+function palindroma(argomento) {
+  // PRENDO LA PAROLA E LA METTO IN UN ARRAY DIVIDENDOLA IN LETTERE
+  let putInArray = argomento.split("");
+  //   console.log(putInArray);
+
+  // CREO UN NUOVO ARRAY CON I VALORI INVERTITI
+  let parolaReverse = putInArray.reverse();
+  //   console.log(parolaReverse);
+
+  let parolaInvertita = parolaReverse.join("");
+  //   console.log(parolaInvertita);
+
+  // RENDO CASE SENSITIVE LE PAROLE PER IL CONFRONTO
+  let parola1 = argomento.toUpperCase();
+  let parola2 = parolaInvertita.toUpperCase();
+
+  // CONFRONTO LE PAROLE
+  if (parola1 === parola2) {
+    return true;
   } else {
-    console.log("La parola inserita NON è palindroma");
+    return false;
   }
 }
