@@ -30,7 +30,7 @@ while (userChoice !== "pari" && userChoice !== "dispari") {
 // CREO INPUT PER RICHIEDERE ALL'UTENTE UN NUMERO DA 1 A 5E FACCIO LA VERIFICA
 let userNumber = prompt("Inserisci un numero compreso tra 1 e 5");
 console.log(userNumber);
-while (userNumber < 1 || userNumber > 5) {
+while (isNaN(userNumber) || userNumber < 1 || userNumber > 5) {
   alert("Inserisci un numero compreso tra 1 e 5");
   userNumber = prompt("Inserisci un numero compreso tra 1 e 5");
   console.log(userNumber);
@@ -44,22 +44,39 @@ let sum = parseInt(userNumber) + parseInt(pcNumber);
 console.log(sum);
 
 // STABILISCO IL VINCITORE
-let result = pariDispari();
-console.log(result);
-if (result === true) {
+let resultPari = isPari();
+let resultDispari = isDispari();
+// console.log(resultDispari, resultPari);
+if (resultPari === true && userChoice === "pari") {
   document.write(
     "<br>" + "Complimenti... Hai vinto... è uscito un numero pari"
   );
-} else {
+} else if (resultPari === true && userChoice === "dispari") {
+  document.write(
+    "<br>" + "Mi dispiace... Hai perso... è uscito un numero pari"
+  );
+} else if (resultDispari === true && userChoice === "dispari") {
+  document.write(
+    "<br>" + "Complimenti... Hai vinto... è uscito un numero dispari"
+  );
+} else if (resultPari === false && userChoice === "dispari") {
+  document.write(
+    "<br>" + "Complimenti... Hai vinto... è uscito un numero dispari"
+  );
+} else if (resultDispari === false && userChoice === "pari") {
+  document.write(
+    "<br>" + "Complimenti... Hai vinto... è uscito un numero pari"
+  );
+} else if (resultDispari === true && userChoice === "pari") {
   document.write(
     "<br>" + "Mi dispiace... Hai perso... è uscito un numero dispari"
   );
 }
 
-// .....................................................................................................INIZIALIZZO LE FUNZIONI
+// .....................................................................................................DEFINISCO LE FUNZIONI
 // .....................................................................................................
 
-// INIZIALIZZO LA FUNZIONE PER LA PAROLA PALINDROMA
+// DEFINISCO LA FUNZIONE PER LA PAROLA PALINDROMA
 function palindroma(argomento) {
   // PRENDO LA PAROLA E LA METTO IN UN ARRAY DIVIDENDOLA IN LETTERE
   let putInArray = argomento.split("");
@@ -84,15 +101,24 @@ function palindroma(argomento) {
   }
 }
 
-// INIZIALIZZO LA FUNZIONE NUMERO RANDOM DA 1 A 5
+// DEFINISCO LA FUNZIONE NUMERO RANDOM DA 1 A 5
 function random1To5() {
   let randomNumber = Math.floor(Math.random() * 5) + 1;
   //   console.log(randomNumber);
   return randomNumber;
 }
-// INIZIALIZZO LA FUNZIONE PARI O DISPARI
-function pariDispari() {
+// DEFINISCO LA FUNZIONE PARI O DISPARI
+function isPari() {
   if (sum % 2 === 0) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+// DEFINISCO LA FUNZIONE PARI O DISPARI
+function isDispari() {
+  if (sum % 2 === 1) {
     return true;
   } else {
     return false;
